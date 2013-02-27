@@ -1,15 +1,13 @@
 /**
  * jQuery lightBox plugin
  * This jQuery plugin was inspired and based on Lightbox 2 by Lokesh Dhakar (http://www.huddletogether.com/projects/lightbox2/)
- * and adapted to me for use like a plugin from jQuery.
- * @name jquery-lightbox-0.5.js
- * @author Leandro Vieira Pinho - http://leandrovieira.com
- * @version 0.5
- * @date April 11, 2008
+ * and adapted by Leandro Vieira Pinho (http://leandrovieira.com) for use like a plugin from jQuery and to me for the responsive way.
+ * @name jquery-lightbox-0.6.js
+ * @author Thibault Henry - http://www.tiloweb.com
+ * @version 0.6
+ * @date Feb 27, 2013
  * @category jQuery plugin
- * @copyright (c) 2008 Leandro Vieira Pinho (leandrovieira.com)
  * @license CCAttribution-ShareAlike 2.5 Brazil - http://creativecommons.org/licenses/by-sa/2.5/br/deed.en_US
- * @example Visit http://leandrovieira.com/projects/jquery/lightbox/ for more informations about this jQuery plugin
  */
 
 // Offering a Custom Alias suport - More info: http://docs.jquery.com/Plugins/Authoring#Custom_Alias
@@ -185,6 +183,14 @@
 			// Image preload process
 			var objImagePreloader = new Image();
 			objImagePreloader.onload = function() {
+			
+			    // Responsive
+    			if(objImagePreloader.width > $(document).width()) {
+        			var ratio = objImagePreloader.width / objImagePreloader.height;
+        			objImagePreloader.width = $(document).width() - 20;
+        			objImagePreloader.height = objImagePreloader.width / ratio;
+    			}
+    			
 				$('#lightbox-image').attr('src',settings.imageArray[settings.activeImage][0]);
 				// Perfomance an effect in the image container resizing it
 				_resize_container_image_box(objImagePreloader.width,objImagePreloader.height);
